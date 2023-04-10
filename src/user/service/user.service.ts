@@ -42,5 +42,14 @@ export class UserService {
         return from(this.userRepository.find({relations: ['department']}));
     }
 
+    findUser(id: number): Observable<User> {
+        return from(this.userRepository.findOne({
+            where: {
+                id: id
+            },
+            relations: ['department']
+        }));
+    }
+
 
 }
