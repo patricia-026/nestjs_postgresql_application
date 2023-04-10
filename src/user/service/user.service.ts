@@ -51,5 +51,9 @@ export class UserService {
         }));
     }
 
+    updateUser(id: number, user: User): Observable<UpdateResult> {
+        return from(this.userRepository.update(id, user));
+    }
+
 
 }

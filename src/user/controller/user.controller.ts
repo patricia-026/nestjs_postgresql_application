@@ -1,7 +1,8 @@
-import { Body, Controller, Post, Get, Param } from '@nestjs/common';
+import { Body, Controller, Post, Get, Param, Put } from '@nestjs/common';
 import { UserService } from '../service/user.service';
-import { Observable } from 'rxjs';
+import { Observable, from } from 'rxjs';
 import { User } from '../models/user.entity';
+import { UpdateResult } from 'typeorm';
 
 @Controller('user')
 export class UserController {
@@ -19,9 +20,14 @@ export class UserController {
         return this.userService.findAllUser();
     }
 
-    @Get()
+    @Get('id')
     findOne(@Param('id') id: number): Observable<User> {
         return from(this.userService.findUser(id));
+    }
+
+    @Put(':id')
+    update(@Param('id') id: number, user: User): Observable<UpdateResult> {
+        return this.userService.updateUser(id, user);
     }
 
 }
