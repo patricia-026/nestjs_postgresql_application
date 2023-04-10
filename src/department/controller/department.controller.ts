@@ -10,7 +10,12 @@ export class DepartmentController {
     ) {}
 
     @Post()
-    create(@Body() department: Department): Observable<Department>{
+    create(@Body() department: Department): Observable<Department> {
         return this.departmentService.createDepartment(department);
+    }
+
+    @Get()
+    findAll(): Observable<Department[]> {
+        return this.departmentService.findAllDepartment();
     }
 }

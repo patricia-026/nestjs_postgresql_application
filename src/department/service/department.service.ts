@@ -11,8 +11,13 @@ export class DepartmentService {
         private readonly departmentRepository: Repository<Department>
     ) {}
 
-    createDepartment(department: Department): Observable<Department>{
+    createDepartment(department: Department): Observable<Department> {
         return from(this.departmentRepository.save(department));
     }
+
+    findAllDepartment(): Observable<Department[]> {
+        return from(this.departmentRepository.find({relations: ['users']}));
+    } 
+
 
 }
