@@ -20,13 +20,13 @@ export class UserController {
         return this.userService.findAllUser();
     }
 
-    @Get('id')
+    @Get(':id')
     findOne(@Param('id') id: number): Observable<User> {
         return from(this.userService.findUser(id));
     }
 
     @Put(':id')
-    update(@Param('id') id: number, user: User): Observable<UpdateResult> {
+    update(@Param('id') id: number, @Body() user: User): Observable<UpdateResult> {
         return this.userService.updateUser(id, user);
     }
 

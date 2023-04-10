@@ -5,10 +5,11 @@ import { UserController } from '../controller/user.controller';
 import { UserService } from '../service/user.service';
 import { DepartmentController } from 'src/department/controller/department.controller';
 import { DepartmentService } from 'src/department/service/department.service';
+import { Department } from 'src/department/models/department.entity';
 
 @Module({
     imports: [
-        TypeOrmModule.forFeature([User])
+        TypeOrmModule.forFeature([User, Department])
     ],
     controllers: [UserController, DepartmentController],
     providers: [UserService, DepartmentService]
