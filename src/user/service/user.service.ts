@@ -1,9 +1,10 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { DepartmentService } from 'src/department/service/department.service';
-import { Repository } from 'typeorm';
+import { Repository, UpdateResult } from 'typeorm';
 import { User } from '../models/user.entity';
 import { Department } from 'src/department/models/department.entity';
+import { Observable, from } from 'rxjs';
 
 @Injectable()
 export class UserService {
@@ -36,4 +37,10 @@ export class UserService {
             this.userRepository.save(user);
         }
     }
+
+    findAllUser(): Observable<User[]> {
+        return from(this.userRepository.find({relations: ['department']}));
+    }
+
+
 }
