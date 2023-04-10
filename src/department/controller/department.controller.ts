@@ -1,4 +1,4 @@
-import { Body, Controller, Post } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post } from '@nestjs/common';
 import { DepartmentService } from '../service/department.service';
 import { Department } from '../models/department.entity';
 import { Observable } from 'rxjs';
@@ -17,5 +17,10 @@ export class DepartmentController {
     @Get()
     findAll(): Observable<Department[]> {
         return this.departmentService.findAllDepartment();
+    }
+
+    @Get(':id')
+    findOne(@Param('id') id: number): Observable<Department> {
+        return this.departmentService.findDepartment(id);
     }
 }

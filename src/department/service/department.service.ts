@@ -19,5 +19,14 @@ export class DepartmentService {
         return from(this.departmentRepository.find({relations: ['users']}));
     } 
 
+    findDepartment(id: number): Observable<Department> {
+        return from(this.departmentRepository.findOne({
+            where: {
+                id: id,
+            },
+            relations: ['users']
+        }));
+    }
+
 
 }
