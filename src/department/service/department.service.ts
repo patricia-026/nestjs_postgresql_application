@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Department } from '../models/department.entity';
-import { Repository } from 'typeorm';
+import { Repository, UpdateResult } from 'typeorm';
 import { Observable, from } from 'rxjs';
 
 @Injectable()
@@ -26,6 +26,10 @@ export class DepartmentService {
             },
             relations: ['users']
         }));
+    }
+
+    updateDepartment(id: number, department: Department): Observable<UpdateResult> {
+        return from(this.departmentRepository.update(id, department));
     }
 
 
