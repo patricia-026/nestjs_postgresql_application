@@ -25,8 +25,10 @@ export class DepartmentController {
         return this.departmentService.findDepartment(id);
     }
 
-    @Put()
+    @Put(':id')
     update(@Param('id') id: number, @Body() department: Department): Observable<UpdateResult> {
         return this.departmentService.updateDepartment(id, department);
     }
+
+
 }
