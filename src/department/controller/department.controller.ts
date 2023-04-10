@@ -1,8 +1,8 @@
-import { Body, Controller, Get, Param, Post, Put } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post, Put } from '@nestjs/common';
 import { DepartmentService } from '../service/department.service';
 import { Department } from '../models/department.entity';
 import { Observable } from 'rxjs';
-import { UpdateResult } from 'typeorm';
+import { DeleteResult, UpdateResult } from 'typeorm';
 
 @Controller('department')
 export class DepartmentController {
@@ -28,6 +28,11 @@ export class DepartmentController {
     @Put(':id')
     update(@Param('id') id: number, @Body() department: Department): Observable<UpdateResult> {
         return this.departmentService.updateDepartment(id, department);
+    }
+
+    @Delete(':id')
+    delete(@Param('id') id: number): Observable<DeleteResult> {
+        return this.departmentService.deleteDepartment(id);
     }
 
 
